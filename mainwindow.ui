@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1079</width>
+    <height>615</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_9">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item alignment="Qt::AlignHCenter">
+     <widget class="QFrame" name="temp_frame">
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>500</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="now_label">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Palatino Linotype</family>
+           <pointsize>27</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Сейчас</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="temp_label">
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Palatino Linotype</family>
+           <pointsize>27</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>6° C</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>Palatino Linotype</family>
+        <pointsize>27</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>По дням</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="left_button">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>15</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton:hover { background-color: rgb(220, 242, 255); }
+
+QPushButton {
+background-color: transparent;
+border-style: outset;
+border-width: 0px;
+border-radius: 5px;
+border-color: beige;
+min-width: 1em;
+padding: 1px;
+}
+
+
+
+
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="src.qrc">
+           <normaloff>:/new/prefix1/pics/left_button.png</normaloff>:/new/prefix1/pics/left_button.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="first_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="first_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Чт 14</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="first_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="second_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="second_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Пт 15</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="second_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="third_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="third_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Сб 16</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="third_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="fourth_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="fourth_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Вс 17</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="fourth_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="fifth_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="fifth_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Пн 18</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="fifth_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="sixth_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="sixth_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Вт 19</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="sixth_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="seventh_day_frame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QLabel" name="seventh_day_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Ср 20</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="sevent_day_temp_label">
+            <property name="font">
+             <font>
+              <family>Palatino Linotype</family>
+              <pointsize>27</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>8°</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="right_button">
+         <property name="minimumSize">
+          <size>
+           <width>15</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton:hover { background-color: rgb(220, 242, 255); }
+
+QPushButton {
+background-color: transparent;
+border-style: outset;
+border-width: 0px;
+border-radius: 5px;
+border-color: beige;
+min-width: 1em;
+padding: 1px;
+}
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="src.qrc">
+           <normaloff>:/new/prefix1/pics/right_button.jpg.png</normaloff>:/new/prefix1/pics/right_button.jpg.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Minimum</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1079</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Погода</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="src.qrc"/>
+ </resources>
+ <connections/>
+</ui>
