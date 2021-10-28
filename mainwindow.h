@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <downloader.h>
+#include <QNetworkReply>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,9 +14,22 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
+    QList<QString> thisWeekDatesArr;
+    int countDays = 0;
+
     void replyFinished(QNetworkReply *reply);
-    void dateOnScreen();
+    void showDateOnScreen();
+    void calcDate();
+    void tempOnScreen(QJsonArray temp);
+    void makeNewRequest();
+
     ~MainWindow();
+
+private slots:
+    void on_left_button_clicked();
+
+    void on_right_button_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Погода</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -109,7 +109,7 @@
      <widget class="QFrame" name="frame">
       <property name="minimumSize">
        <size>
-        <width>800</width>
+        <width>1000</width>
         <height>0</height>
        </size>
       </property>
@@ -130,7 +130,7 @@
         <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>5</number>
+        <number>0</number>
        </property>
        <property name="bottomMargin">
         <number>0</number>
@@ -186,8 +186,26 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="first_day_label">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Palatino Linotype</family>
@@ -208,7 +226,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -224,8 +242,26 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="second_day_label">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Palatino Linotype</family>
@@ -246,7 +282,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -262,8 +298,26 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="third_day_label">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Palatino Linotype</family>
@@ -284,7 +338,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -300,6 +354,18 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="fourth_day_label">
             <property name="font">
@@ -322,7 +388,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -338,8 +404,29 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="fifth_day_label">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Palatino Linotype</family>
@@ -360,7 +447,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -376,6 +463,21 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_7">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="sixth_day_label">
             <property name="font">
@@ -398,7 +500,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -414,8 +516,29 @@ padding: 1px;
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_8">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="seventh_day_label">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <family>Palatino Linotype</family>
@@ -436,7 +559,7 @@ padding: 1px;
              </font>
             </property>
             <property name="text">
-             <string>8°</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -489,9 +612,6 @@ padding: 1px;
      </widget>
     </item>
     <item>
-     <widget class="QTextBrowser" name="textBrowser"/>
-    </item>
-    <item>
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -509,23 +629,6 @@ padding: 1px;
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1079</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>Погода</string>
-    </property>
-   </widget>
-   <addaction name="menu"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="src.qrc"/>
