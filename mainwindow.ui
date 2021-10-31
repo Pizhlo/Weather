@@ -93,16 +93,67 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <family>Palatino Linotype</family>
-        <pointsize>27</pointsize>
-       </font>
+     <widget class="QFrame" name="frame_combobox_label">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
-      <property name="text">
-       <string>По дням</string>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
       </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item alignment="Qt::AlignLeft">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <family>Palatino Linotype</family>
+           <pointsize>27</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>По дням</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignRight">
+        <widget class="QComboBox" name="comboBox">
+         <item>
+          <property name="text">
+           <string>Температура</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Влажность</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Осадки, мм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Давление</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Скорость ветра</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Восход солнца</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Заход солнца</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter">

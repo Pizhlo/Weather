@@ -15,14 +15,20 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
 
-    QList<QString> thisWeekDatesArr;
+    QList<QString> weekDatesForScreen; // need to show dates on screen
+    QList<QString> weekDatesForRequest;  // need to make new request with new dates
+    QList<QString> weekDatesForKeys; // need to take value in QList temperature (void tempOnScreen)
+    QString temp_now;
+    QUrl url;
     int countDays = 0;
 
     void replyFinished(QNetworkReply *reply);
     void showDateOnScreen();
     void calcDate();
-    void tempOnScreen(QJsonArray temp);
-    void makeNewRequest();
+    void tempOnScreen(QJsonObject temp);
+    void makeRequest();
+    void makeWeekKeysForShowing();
+    void makeWeekKeysForRequest();
 
     ~MainWindow();
 

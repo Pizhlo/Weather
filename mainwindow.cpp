@@ -9,6 +9,7 @@
 #include <QByteArray>
 #include <QLocale>
 #include <QTime>
+#include <QMap>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,13 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     calcDate();
 
-    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+    makeWeekKeysForRequest();
 
-    connect(manager, &QNetworkAccessManager::finished,
-            this, &MainWindow::replyFinished);
-
-    manager->get(QNetworkRequest(QUrl("http://api.weatherunlocked.com/api/forecast/55.45,37.36?app_id=18fdb593&app_key=592b64ad8b4240186225b9dff72b9e8c")));
-
+    makeRequest();
 
 }
 
@@ -34,89 +31,78 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::makeNewRequest() { // makes new request when any button presed
+void MainWindow::makeRequest() { // makes new request when any button pressed
 
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
-    QString url = "http://api.weatherunlocked.com/api/trigger/55.45,37.36/pastday.";
 
-    if (countDays < 0) {
+    QString thisUrl;
 
-        QDate date = QDate::currentDate().addDays(countDays);
-        QString date_1 = date.toString("yyyy.MM.dd");
+    thisUrl = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Moscow%2C%20MOW%2C%20RU/";
 
-        //qDebug() << date_1;
+    thisUrl += weekDatesForRequest[0] + '/' + weekDatesForRequest.last() + "?unitGroup=metric&key=P99F9W84P9WW97FYZSQ9KYJMH";
 
-        url += date_1;
+    url = thisUrl;
 
-       // qDebug() << url;
+    manager->get(QNetworkRequest(QUrl(url)));
 
-        QNetworkReply *reply = manager->get(QNetworkRequest(QUrl(url)));
-       // qDebug() << reply->readAll();
+    connect(manager, &QNetworkAccessManager::finished,
+                this, &MainWindow::replyFinished);
 
+    makeWeekKeysForShowing();
 
-    }
-
-    //api/trigger/52.48,13.41/past morning.2014.01.25
-
-    delete manager;
 }
-
 
 
 void MainWindow::replyFinished(QNetworkReply *reply)
-{
-
-    //QList<QTime> time = {QTime(4, 0), QTime(7, 0), QTime(10, 0), QTime(13, 0), QTime(16, 0), QTime(19, 0), QTime(22, 0)};
-    //QTime now_time = QTime::currentTime();
-    //QList<QDateTime> difference;
-   // QTime min_difference;
-   // int msec = 0;
-
-    // for current temperature
-
-   // for (int i =0; i <= time.length(); i++){
-
-        //difference.append(QTime(QDateTime::currentDateTime()).secsTo(time[i]));
-
-   // }
-
-
-
+{   
     QByteArray myData = reply->readAll();
+
+    qDebug() << myData;
+
     QJsonDocument itemDoc = QJsonDocument::fromJson(myData);
     QJsonObject rootObject = itemDoc.object();
-    QJsonValue value_days = rootObject.take("Days");
-    QJsonArray value_days_arr = value_days.toArray();
 
-    QList<QJsonValue> a;
-    QList <QJsonValue> temp_arr;
-    QList <QJsonValue> data_arr;
-    QJsonArray temperature_arr;
-    QJsonObject temp;
-    QJsonValue temp_2;
-    QJsonObject temp_3;
-    QJsonValue temp_now;
+    QJsonValue value_days = rootObject.take("days");
+    QJsonArray days_arr = value_days.toArray();
 
-    for (int i = 0; i < 7; i++) {
+    QJsonValue temp;
+    QString temp_2;
+    QJsonValue temp_1;
+    QJsonObject temperatureAllWeek;
+    QJsonObject humidityAllWeek;
+    QJsonObject windSpeedAllWeek;
 
-        a.append(value_days_arr[i]);
-        temp = a[i].toObject();
-        temp_2 = temp.take("Timeframes");
-        temp_arr.append(temp_2);
-        data_arr.append(temp_arr[i][3]);
-        temp_3 = data_arr[i].toObject();
-        temperature_arr.append(temp_3.take("temp_c"));
+    for (int i = 0; i < days_arr.count(); i++) { // filling in array of temperature
+
+        temp = days_arr[i].toObject().value("datetime");
+        temp_2 = temp.toString();
+        temp_1 = days_arr[i].toObject().value("temp");
+        temperatureAllWeek.insert(temp_2, temp_1);
+
+        temp_1 = days_arr[i].toObject().value("humidity");
+        humidityAllWeek.insert(temp_2, temp_1);
+
+        temp_1 = days_arr[i].toObject().value("windspeed");
+        windSpeedAllWeek.insert(temp_2, temp_1);
+
+        qDebug() << windSpeedAllWeek;
+
 
     }
 
-   tempOnScreen(temperature_arr);
-
+    tempOnScreen(temperatureAllWeek);
 }
 
 
-void MainWindow::tempOnScreen(QJsonArray temp) { // shows temp on the screen
+void MainWindow::tempOnScreen(QJsonObject temp) { // shows temp on the screen
 
     QList<QLabel*> tempLabelsArray;
+
+    if (countDays == 0) {
+
+        temp_now = QString::number(temp.value(QDate::currentDate().toString("yyyy-MM-dd")).toDouble());
+        ui->temp_label->setText(temp_now);
+    }
 
     tempLabelsArray.append(ui->first_day_temp_label);
     tempLabelsArray.append(ui->second_day_temp_label);
@@ -128,31 +114,58 @@ void MainWindow::tempOnScreen(QJsonArray temp) { // shows temp on the screen
 
     for (int i = 0; i < 7; i++) {
 
-        tempLabelsArray.at(i)->setText(QString::number(temp.at(i).toDouble()));
+        tempLabelsArray[i]->setText(QString::number(temp.value(weekDatesForKeys[i]).toDouble()));
 
     }
+}
+
+void MainWindow::makeWeekKeysForShowing() { // making keys for QJsonObject temp
+
+    QDate today_date;
+
+    today_date = today_date.currentDate();
+
+    weekDatesForKeys.clear();
+
+    for (int i = 0; i < 7; i++) { // filling in array with dates for showing matching temperature
+
+        weekDatesForKeys << (today_date.currentDate().addDays(i+countDays).toString("yyyy-MM-dd"));
+    }
+
+}
+
+void MainWindow::makeWeekKeysForRequest() {
+
+    QDate today_date;
+
+    weekDatesForRequest.clear();
+
+    weekDatesForRequest << (today_date.currentDate().addDays(countDays)).toString("yyyy-MM-d");
+    weekDatesForRequest << (today_date.currentDate().addDays(6 + countDays)).toString("yyyy-MM-d");
+
+    if (countDays != 0) {
+
+        makeRequest();
+    }
+
 
 }
 
 void MainWindow::calcDate() { // changes dates on the screen
 
-    thisWeekDatesArr.clear();
+    weekDatesForScreen.clear();
 
     QDate today_date;
     QString week_of_day;
-
-    today_date = today_date.currentDate();
 
     for (int i = 0; i < 7; i++) {
 
         week_of_day = QLocale{QLocale::Russian}.toString(today_date.currentDate().addDays(i+countDays), "ddd");
 
-        thisWeekDatesArr << today_date.currentDate().addDays(i+countDays).toString("d") + " " + week_of_day;
-
+        weekDatesForScreen << today_date.currentDate().addDays(i+countDays).toString("d") + " " + week_of_day;
     }
 
     showDateOnScreen();
-
 }
 
 void MainWindow::showDateOnScreen() { // shows dates on the screen
@@ -169,7 +182,7 @@ void MainWindow::showDateOnScreen() { // shows dates on the screen
 
     for (int i = 0; i < 7; i++) {
 
-        weekDatesLabelArray[i]->setText(thisWeekDatesArr[i]);
+        weekDatesLabelArray[i]->setText(weekDatesForScreen[i]);
 
     }
 
@@ -180,10 +193,8 @@ void MainWindow::showDateOnScreen() { // shows dates on the screen
 void MainWindow::on_left_button_clicked()
 {
     --countDays;
-
-    makeNewRequest();
-
     calcDate();
+    makeWeekKeysForRequest();
 
 }
 
@@ -191,9 +202,8 @@ void MainWindow::on_left_button_clicked()
 void MainWindow::on_right_button_clicked()
 {
     ++countDays;
-
-    makeNewRequest();
-
     calcDate();
+    makeWeekKeysForRequest();
+
 }
 
