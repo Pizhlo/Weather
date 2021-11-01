@@ -9,7 +9,14 @@
 #include <QByteArray>
 #include <QLocale>
 #include <QTime>
-#include <QMap>
+
+QJsonObject temperatureAllWeek; // температура
+QJsonObject humidityAllWeek; // влажность
+QJsonObject precipitationAllWeek; // осадки
+QJsonObject windSpeedAllWeek; // скорость ветра
+QJsonObject sunriseAllWeek; // восход солнца
+QJsonObject sunsetAllWeek; // заход солнца
+QJsonObject pressureAllWeek; // давление
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -56,9 +63,6 @@ void MainWindow::makeRequest() { // makes new request when any button pressed
 void MainWindow::replyFinished(QNetworkReply *reply)
 {   
     QByteArray myData = reply->readAll();
-
-    qDebug() << myData;
-
     QJsonDocument itemDoc = QJsonDocument::fromJson(myData);
     QJsonObject rootObject = itemDoc.object();
 
@@ -68,14 +72,12 @@ void MainWindow::replyFinished(QNetworkReply *reply)
     QJsonValue temp;
     QString temp_2;
     QJsonValue temp_1;
-    QJsonObject temperatureAllWeek;
-    QJsonObject humidityAllWeek;
-    QJsonObject windSpeedAllWeek;
 
-    for (int i = 0; i < days_arr.count(); i++) { // filling in array of temperature
+    for (int i = 0; i < days_arr.count(); i++) {
 
         temp = days_arr[i].toObject().value("datetime");
         temp_2 = temp.toString();
+
         temp_1 = days_arr[i].toObject().value("temp");
         temperatureAllWeek.insert(temp_2, temp_1);
 
@@ -85,24 +87,31 @@ void MainWindow::replyFinished(QNetworkReply *reply)
         temp_1 = days_arr[i].toObject().value("windspeed");
         windSpeedAllWeek.insert(temp_2, temp_1);
 
-        qDebug() << windSpeedAllWeek;
+        temp_1 = days_arr[i].toObject().value("sunrise");
+        sunriseAllWeek.insert(temp_2, temp_1);
 
+        //qDebug() << sunriseAllWeek;
+
+        temp_1 = days_arr[i].toObject().value("sunset");
+        sunsetAllWeek.insert(temp_2, temp_1);
+
+        //qDebug() << sunsetAllWeek;
+
+        temp_1 = days_arr[i].toObject().value("pressure");
+        pressureAllWeek.insert(temp_2, temp_1);
+
+        temp_1 = days_arr[i].toObject().value("precip");
+        precipitationAllWeek.insert(temp_2, temp_1);
 
     }
 
-    tempOnScreen(temperatureAllWeek);
+    infoOnScreen(ui->comboBox->currentIndex());
 }
 
 
-void MainWindow::tempOnScreen(QJsonObject temp) { // shows temp on the screen
+void MainWindow::infoOnScreen(int parametr) { // shows temp on the screen
 
     QList<QLabel*> tempLabelsArray;
-
-    if (countDays == 0) {
-
-        temp_now = QString::number(temp.value(QDate::currentDate().toString("yyyy-MM-dd")).toDouble());
-        ui->temp_label->setText(temp_now);
-    }
 
     tempLabelsArray.append(ui->first_day_temp_label);
     tempLabelsArray.append(ui->second_day_temp_label);
@@ -112,10 +121,84 @@ void MainWindow::tempOnScreen(QJsonObject temp) { // shows temp on the screen
     tempLabelsArray.append(ui->sixth_day_temp_label);
     tempLabelsArray.append(ui->sevent_day_temp_label);
 
-    for (int i = 0; i < 7; i++) {
+    if (countDays == 0) {
 
-        tempLabelsArray[i]->setText(QString::number(temp.value(weekDatesForKeys[i]).toDouble()));
+        temp_now = QString::number(temperatureAllWeek.value(QDate::currentDate().toString("yyyy-MM-dd")).toDouble());
+        ui->temp_label->setText(temp_now);
+    }
 
+    if (parametr == 0) {
+
+        for (int i = 0; i < 7; i++) {
+
+            tempLabelsArray[i]->setText(QString::number(temperatureAllWeek.value(weekDatesForKeys[i]).toDouble()));
+
+            }
+        }
+
+    if (parametr == 1) {
+
+        for (int i = 0; i < 7; i++) {
+
+            tempLabelsArray[i]->setText(QString::number(humidityAllWeek.value(weekDatesForKeys[i]).toDouble()));
+
+            }
+    }
+
+    if (parametr == 2) {
+
+        for (int i = 0; i < 7; i++) {
+
+            tempLabelsArray[i]->setText(QString::number(precipitationAllWeek.value(weekDatesForKeys[i]).toDouble()));
+
+            }
+    }
+
+    if (parametr == 3) {
+
+        for (int i = 0; i < 7; i++) {
+
+            tempLabelsArray[i]->setText(QString::number(pressureAllWeek.value(weekDatesForKeys[i]).toDouble()));
+
+            }
+    }
+
+    if (parametr == 4) {
+
+        for (int i = 0; i < 7; i++) {
+
+            tempLabelsArray[i]->setText(QString::number(windSpeedAllWeek.value(weekDatesForKeys[i]).toDouble()));
+
+            }
+    }
+
+    if (parametr == 5) {
+
+        QTime time;
+        QString time_2;
+
+        for (int i = 0; i < 7; i++) {
+
+            time_2 = sunriseAllWeek.value(weekDatesForKeys[i]).toString();
+
+            qDebug() << "string = " << time_2;
+
+            time = QTime::fromString(time_2, "hh:mm:ss"); // ??
+
+            qDebug() << "time = " << time;
+
+            tempLabelsArray[i]->setText(time.toString());
+
+            }
+    }
+
+    if (parametr == 6) {
+
+        for (int i = 0; i < 7; i++) {
+
+            tempLabelsArray[i]->setText((sunsetAllWeek.value(weekDatesForKeys[i]).toString()));
+
+            }
     }
 }
 
@@ -204,6 +287,13 @@ void MainWindow::on_right_button_clicked()
     ++countDays;
     calcDate();
     makeWeekKeysForRequest();
+
+}
+
+
+void MainWindow::on_comboBox_activated(int index)
+{
+    infoOnScreen(index);
 
 }
 

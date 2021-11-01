@@ -269,6 +269,13 @@ padding: 1px;
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="first_day_icon">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="first_day_temp_label">
             <property name="font">
              <font>
@@ -319,6 +326,13 @@ padding: 1px;
               <pointsize>27</pointsize>
              </font>
             </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="second_day_icon">
             <property name="text">
              <string/>
             </property>
@@ -381,6 +395,13 @@ padding: 1px;
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="third_day_icon">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="third_day_temp_label">
             <property name="font">
              <font>
@@ -425,6 +446,13 @@ padding: 1px;
               <pointsize>27</pointsize>
              </font>
             </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="fourth_day_icon">
             <property name="text">
              <string/>
             </property>
@@ -490,6 +518,13 @@ padding: 1px;
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="fifth_day_icon">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="fifth_day_temp_label">
             <property name="font">
              <font>
@@ -537,6 +572,13 @@ padding: 1px;
               <pointsize>27</pointsize>
              </font>
             </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="sixth_day_icon">
             <property name="text">
              <string/>
             </property>
@@ -596,6 +638,13 @@ padding: 1px;
               <pointsize>27</pointsize>
              </font>
             </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="seventh_day_icon">
             <property name="text">
              <string/>
             </property>

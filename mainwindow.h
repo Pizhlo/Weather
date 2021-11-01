@@ -25,7 +25,7 @@ public:
     void replyFinished(QNetworkReply *reply);
     void showDateOnScreen();
     void calcDate();
-    void tempOnScreen(QJsonObject temp);
+    void infoOnScreen(int parametr = 0);
     void makeRequest();
     void makeWeekKeysForShowing();
     void makeWeekKeysForRequest();
@@ -36,6 +36,8 @@ private slots:
     void on_left_button_clicked();
 
     void on_right_button_clicked();
+
+    void on_comboBox_activated(int index);
 
 private:
     Ui::MainWindow *ui;
