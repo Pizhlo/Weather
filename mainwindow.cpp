@@ -17,6 +17,8 @@ QJsonObject windSpeedAllWeek; // скорость ветра
 QJsonObject sunriseAllWeek; // восход солнца
 QJsonObject sunsetAllWeek; // заход солнца
 QJsonObject pressureAllWeek; // давление
+QJsonObject conditionsAllWeek; // описание
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -90,12 +92,8 @@ void MainWindow::replyFinished(QNetworkReply *reply)
         temp_1 = days_arr[i].toObject().value("sunrise");
         sunriseAllWeek.insert(temp_2, temp_1);
 
-        //qDebug() << sunriseAllWeek;
-
         temp_1 = days_arr[i].toObject().value("sunset");
         sunsetAllWeek.insert(temp_2, temp_1);
-
-        //qDebug() << sunsetAllWeek;
 
         temp_1 = days_arr[i].toObject().value("pressure");
         pressureAllWeek.insert(temp_2, temp_1);
@@ -103,17 +101,21 @@ void MainWindow::replyFinished(QNetworkReply *reply)
         temp_1 = days_arr[i].toObject().value("precip");
         precipitationAllWeek.insert(temp_2, temp_1);
 
+        temp_1 = days_arr[i].toObject().value("conditions");
+        conditionsAllWeek.insert(temp_2, temp_1);
+
     }
 
     infoOnScreen(ui->comboBox->currentIndex());
 }
 
 
-void MainWindow::infoOnScreen(int parametr) { // shows temp on the screen
+void MainWindow::infoOnScreen(int parametr) {
 
     QList<QLabel*> tempLabelsArray;
+    QList<QLabel*> iconLabelsArray;
 
-    tempLabelsArray.append(ui->first_day_temp_label);
+    tempLabelsArray.append(ui->first_day_temp_label);  // labels for showing info
     tempLabelsArray.append(ui->second_day_temp_label);
     tempLabelsArray.append(ui->third_day_temp_label);
     tempLabelsArray.append(ui->fourth_day_temp_label);
@@ -121,17 +123,99 @@ void MainWindow::infoOnScreen(int parametr) { // shows temp on the screen
     tempLabelsArray.append(ui->sixth_day_temp_label);
     tempLabelsArray.append(ui->sevent_day_temp_label);
 
+    iconLabelsArray.append(ui->first_day_icon);  // labels for showing icons of weather
+    iconLabelsArray.append(ui->second_day_icon);
+    iconLabelsArray.append(ui->third_day_icon);
+    iconLabelsArray.append(ui->fourth_day_icon);
+    iconLabelsArray.append(ui->fifth_day_icon);
+    iconLabelsArray.append(ui->sixth_day_icon);
+    iconLabelsArray.append(ui->seventh_day_icon);
+
+    // these conditions show weather today in text
+
+    if (conditionsAllWeek.value(weekDatesForKeys[0]) == "Rain") {
+
+        ui->weather_label->setText("Дождь");
+
+    }
+
+    if (conditionsAllWeek.value(weekDatesForKeys[0]) == "Overcast") {
+
+        ui->weather_label->setText("Пасмурно");
+
+    }
+
+    if (conditionsAllWeek.value(weekDatesForKeys[0]) == "Partially cloudy") {
+
+        ui->weather_label->setText("Облачно");
+
+    }
+
+    if (conditionsAllWeek.value(weekDatesForKeys[0]) == "Snow") {
+
+        ui->weather_label->setText("Снег");
+
+    }
+
+    if (conditionsAllWeek.value(weekDatesForKeys[0]) == "Clear") {
+
+        ui->weather_label->setText("Ясно");
+
+    }
+
+
+    for (int i = 0; i < 7; i++) {
+
+        if ((conditionsAllWeek.value(weekDatesForKeys[i])) == "Partially cloudy") {
+
+            iconLabelsArray[i]->setPixmap(QPixmap(":/icons/icons/weather/cloudy.png"));
+        }
+
+        if ((conditionsAllWeek.value(weekDatesForKeys[i])) == "Clear") {
+
+            iconLabelsArray[i]->setPixmap(QPixmap(":/icons/icons/weather/sun.png"));
+        }
+
+        if ((conditionsAllWeek.value(weekDatesForKeys[i])) == "Overcast") {
+
+            iconLabelsArray[i]->setPixmap(QPixmap(":/icons/icons/weather/overcast.png"));
+        }
+
+        if ((conditionsAllWeek.value(weekDatesForKeys[i])) == "Rain") {
+
+            iconLabelsArray[i]->setPixmap(QPixmap(":/icons/icons/weather/raining.png"));
+        }
+
+        if ((conditionsAllWeek.value(weekDatesForKeys[i])) == "Snow") {
+
+            iconLabelsArray[i]->setPixmap(QPixmap(":/icons/icons/weather/snow.png"));
+        }
+
+    }    
+
     if (countDays == 0) {
 
         temp_now = QString::number(temperatureAllWeek.value(QDate::currentDate().toString("yyyy-MM-dd")).toDouble());
         ui->temp_label->setText(temp_now);
     }
 
-    if (parametr == 0) {
+    if (parametr == 0) {       
 
         for (int i = 0; i < 7; i++) {
 
             tempLabelsArray[i]->setText(QString::number(temperatureAllWeek.value(weekDatesForKeys[i]).toDouble()));
+
+           // QGraphicsScene scene;
+
+          //  scene.addText("Hello, world!");
+
+          //  QGraphicsView view(&scene);
+          //  view.show();
+
+
+
+
+
 
             }
         }
@@ -174,29 +258,30 @@ void MainWindow::infoOnScreen(int parametr) { // shows temp on the screen
 
     if (parametr == 5) {
 
-        QTime time;
-        QString time_2;
+        QString time;
 
         for (int i = 0; i < 7; i++) {
 
-            time_2 = sunriseAllWeek.value(weekDatesForKeys[i]).toString();
+            time = sunriseAllWeek.value(weekDatesForKeys[i]).toString();
 
-            qDebug() << "string = " << time_2;
+            time = time.split(QChar(':')).mid(0, 2).join(QChar(':'));
 
-            time = QTime::fromString(time_2, "hh:mm:ss"); // ??
-
-            qDebug() << "time = " << time;
-
-            tempLabelsArray[i]->setText(time.toString());
+            tempLabelsArray[i]->setText(time);
 
             }
     }
 
     if (parametr == 6) {
 
+         QString time;
+
         for (int i = 0; i < 7; i++) {
 
-            tempLabelsArray[i]->setText((sunsetAllWeek.value(weekDatesForKeys[i]).toString()));
+            time = sunsetAllWeek.value(weekDatesForKeys[i]).toString();
+
+            time = time.split(QChar(':')).mid(0, 2).join(QChar(':'));
+
+            tempLabelsArray[i]->setText(time);
 
             }
     }
@@ -230,7 +315,6 @@ void MainWindow::makeWeekKeysForRequest() {
 
         makeRequest();
     }
-
 
 }
 

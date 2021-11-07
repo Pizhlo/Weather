@@ -1,6 +1,6 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
-        <file>left_button.png</file>
-        <file>right_button.jpg.png</file>
-    </qresource>
+    <qresource prefix="/test"/>
+    <qresource prefix="/11"/>
+    <qresource prefix="/weather_icons"/>
+    <qresource prefix="/icons"/>
 </RCC>

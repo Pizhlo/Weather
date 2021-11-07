@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/buttons/left_button.png</file>
+        <file>icons/buttons/right_button.jpg.png</file>
+        <file>icons/weather/cloudy.png</file>
+        <file>icons/weather/overcast.png</file>
+        <file>icons/weather/overcast_orig.jpg</file>
+        <file>icons/weather/rain_lightning.png</file>
+        <file>icons/weather/raining.png</file>
+        <file>icons/weather/snow.png</file>
+        <file>icons/weather/sun.png</file>
+    </qresource>
+</RCC>

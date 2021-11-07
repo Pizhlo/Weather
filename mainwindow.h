@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QNetworkReply>
+#include <QPainterPath>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,5 +44,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QPainterPath painter;
+    QGraphicsScene *scene;
+    QGraphicsView *view;
+
+
 };
 #endif // MAINWINDOW_H
